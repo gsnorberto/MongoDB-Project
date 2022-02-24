@@ -30,3 +30,20 @@ export const idadeAction = (req: Request, res: Response) => {
         mostrarIdade
     });
 };
+
+export const addUser = (req: Request, res: Response) => {
+    let emptyFields = false;
+
+    if(
+        req.body.firstName && req.body.lastName &&
+        req.body.email && req.body.age && req.body.interests
+    ){
+        
+    } else {
+        emptyFields = true;
+    }
+
+    res.render('pages/home', {
+        
+    })
+}

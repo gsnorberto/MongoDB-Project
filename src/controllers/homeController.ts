@@ -5,6 +5,8 @@ import User from '../models/User';
 
 export const home = async (req: Request, res: Response)=>{
 
+    // *************** CONSULTAS NO BD ***************
+
     //let usuarios = await User.find({}); // Consulta de mais de um registro
 
     //let usuarios = await User.findOne({ email: "gabriel@hotmail.com" }) //encontrar por email
@@ -45,14 +47,30 @@ export const home = async (req: Request, res: Response)=>{
     // }).limit(2)
 
     //Lógica de paginação
-    let usuarios = await User.find({
-        age: {$gt: 18}
-    }).skip(2).limit(2)
+    // let usuarios = await User.find({
+    //     age: {$gt: 18}
+    // }).skip(2).limit(2)
+
+    // console.log("Usuario:", usuarios);
 
 
+    // *************** INSERÇÃO NO BD ***************
+    // Método 1: Usando o Create
+    // let newUser = await User.create({
+    //     name: { firstName: "Monaliza", lastName: "Santana" },
+    //     email: 'mona@gmail.com',
+    //     age: 50,
+    //     interests: ['arte', 'pizza']
+    // });
 
-    console.log("Usuario:", usuarios);
-    
+    //Método 2: RECOMENDADO
+    let newUser = new User();
+    newUser.name = { firstName: 'André', lastName: 'Soares'};
+    newUser.email = 'andre@hotmail.com';
+    newUser.age = 45;
+    newUser.interests = ['Programação']
+    let resultado = await newUser.save();
+
     let age: number = 90;
     let showOld: boolean = false;
 
