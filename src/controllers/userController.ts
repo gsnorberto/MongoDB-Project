@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import User from '../models/User';
 
 export const nome = (req: Request, res: Response) => {
     let nome: string = req.query.nome as string;
@@ -31,19 +32,30 @@ export const idadeAction = (req: Request, res: Response) => {
     });
 };
 
-export const addUser = (req: Request, res: Response) => {
+export const addUser = async (req: Request, res: Response) => {
     let emptyFields = false;
+    let newUser = new User();
 
     if(
         req.body.firstName && req.body.lastName &&
         req.body.email && req.body.age && req.body.interests
     ){
-        
+        let interests = req.body.interests.split(' ')
+
+        newUser.name.firstName = req.body.firstName;
+        newUser.name.lastName = req.body.lastName;
+        newUser.age = parseInt(req.body.age);
+        newUser.email = req.body.email;
+        newUser.interests = interests 
+
+        let resultado = await newUser.save()
     } else {
         emptyFields = true;
     }
-
+    let users = await User.find({});
+    
     res.render('pages/home', {
-        
+        emptyFields,
+        users
     })
 }
