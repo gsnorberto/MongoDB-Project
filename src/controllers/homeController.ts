@@ -5,10 +5,29 @@ import User from '../models/User';
 
 export const home = async (req: Request, res: Response) => {
 
+   //************* ATUALIZAÇÃO DE DADOS *************
+   // await User.updateMany(
+   //    { age: {$lte: 20}}, //condição
+   //    { age: 18 } //dados para alteração
+   // )
+
+   // await User.updateOne(
+   //    { email: 'victor@hotmail.com' }, //condição
+   //    { age: 49 } //dados para alteração
+   // )
+
+   // let victor = await User.findOne({ email: "victor@hotmail.com" })
+   // victor ? victor.name.lastName = 'Teste' : null
+   // victor ? victor.age = 54 : null
+   // await victor?.save();
+
+   //***************** DELETAR DADOS ****************
+   //let Luca = User.deleteOne({email: 'Luca@outlook.com'})
+
+   
    // *************** CONSULTAS NO BD ***************
 
    let users = await User.find({}); // Consulta de mais de um registro
-
 
    // Filtrar *********************************
    /*
@@ -43,7 +62,7 @@ export const home = async (req: Request, res: Response) => {
    */
    // console.log("Usuario:", usuarios);
 
-   // INSERÇÃO NO BD **************************
+   // **************** INSERÇÃO NO BD *********************
    // Método 1: Usando o Create
    /*
        let newUser = await User.create({
